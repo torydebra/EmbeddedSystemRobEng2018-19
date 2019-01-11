@@ -8,6 +8,9 @@
 #ifndef SETUPCLASS_H
 #define	SETUPCLASS_H
 
+void setupParser();
+void setupBuffer();
+void setupBufferTemp();
 
 #endif	/* SETUPCLASS_H */
 
