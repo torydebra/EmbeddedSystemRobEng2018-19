@@ -39,6 +39,9 @@
 #include "scheduler.h"
 #include "buffer.h"
 #include "bufferTemp.h"
+#include "lcd.h"
+#include "timer.h"
+#include "uart.h"
 
 Heartbeat schedInfo[MAX_TASKS];
 Buffer bufReceiving;

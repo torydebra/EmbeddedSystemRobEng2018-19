@@ -3,6 +3,7 @@
 
 int send2pc(char* type, char* payload);
 void setupUART2();
+void __attribute__((__interrupt__, __auto_psv__)) _U2RXInterrupt ();
 
 #endif	/* UART_H */
 

@@ -1,5 +1,7 @@
 #include "uart.h"
 #include "xc.h"
+#include "buffer.h"
+#include "globalVar.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -28,4 +30,14 @@ void setupUART2(){
     U2BRG = 11; // (7372800 / 4) / (16 * 9600) - 1
     U2MODEbits.UARTEN = 1; // enable UART
     U2STAbits.UTXEN = 1; // enable U2TX (must be after UARTEN)
+    
+    IEC1bits.U2RXIE = 1; // enable interrupt
+    U2STAbits.URXISEL = 10; // interrupt arrives when UART2 receiver is 3/4 full
+}
+
+void __attribute__((__interrupt__, __auto_psv__)) _U2RXInterrupt () {
+    
+    IFS1bits.U2RXIF = 0; // reset interrupt flag
+    int val = U2RXREG;
+    writeBuf(&bufReceiving, val); // store value in buffer
 }

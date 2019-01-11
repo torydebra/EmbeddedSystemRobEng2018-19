@@ -10,15 +10,9 @@
 #include "parser.h"
 #include "uart.h"
 #include "globalVar.h"
+#include "lcd.h"
 
 #define MAX_CHAR_READ 25
-
-void __attribute__((__interrupt__, __auto_psv__)) _U2RXInterrupt () {
-    
-    IFS1bits.U2RXIF = 0; // reset interrupt flag
-    int val = U2RXREG;
-    writeBuf(&bufReceiving, val); // store value in buffer
-}
 
 int processMessage(char* type, char* payload){
     
@@ -72,15 +66,21 @@ int readFromUartTask(void) {
     for (i=0; i < MAX_CHAR_READ; i++){
         
         int bufVal = readBuf(&bufReceiving);
-        if (bufVal != 0) { // first check if there are characters to be read in the buffer 
+        if (bufVal != 0) { // first check if there are characters to be read in the buffer
             value = bufVal;
+            c=value;
+            writeLCD(c);
 
         } else if (U2STAbits.URXDA == 1) { //notifies if there are characters to be read    
             value = U2RXREG; 
+            c=value;
+            writeLCD(c);
         }
         
         c = value; //"convert" into the correspondend ascii
-        retParse = parse_byte(&pstate, c);
+        //retParse = parse_byte(&pstate, c);
+        
+        
         
         if (retParse == NEW_MESSAGE){
             processMessage(pstate.msg_type, pstate.msg_payload);
