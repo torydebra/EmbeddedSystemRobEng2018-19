@@ -33,18 +33,19 @@
 // Use project enums instead of #define for ON and OFF.
 
 #include <xc.h>
+#include "setupPeripherals.h"
+#include "setupClass.h"
 #include "parser.h"
 #include "scheduler.h"
 
 heartbeat schedInfo[MAX_TASKS];
-
+setupBuffer();
+setupParser();
 
 int main(void) {
-    // parser initialization
-    parser_state pstate;
-	pstate.state = STATE_DOLLAR;
-	pstate.index_type = 0; 
-	pstate.index_payload = 0;
+    
+
+    setupUART2();
     
     
     // main loop
@@ -52,7 +53,7 @@ int main(void) {
         
         scheduler();
         
-        tmr_waitperiod;
+        //tmr_waitperiod;
         
     }
     
