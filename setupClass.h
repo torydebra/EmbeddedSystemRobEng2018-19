@@ -1,6 +1,6 @@
 /* 
  * File:   setupClass.h
- * Author: tori
+ * Author: tori & fafux
  *
  * Created on 11 gennaio 2019, 11.51
  */

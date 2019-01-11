@@ -1,6 +1,6 @@
 /*
  * File:   buffer.c
- * Author: tori
+ * Author: tori & fafux
  *
  * Created on 11 gennaio 2019, 10.04
  */

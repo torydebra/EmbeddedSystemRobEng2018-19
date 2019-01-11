@@ -1,6 +1,6 @@
 /*
  * File:   readFromUartTask.c
- * Author: tori
+ * Author: tori & fafux
  *
  * Created on 10 gennaio 2019, 16.04
  */

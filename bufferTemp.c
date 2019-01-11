@@ -1,6 +1,6 @@
 /*
  * File:   bufferTemp.c
- * Author: fafux
+ * Author: fafux & tori
  *
  * Created on 11 gennaio 2019, 10.04
  */

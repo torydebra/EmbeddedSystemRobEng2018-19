@@ -1,6 +1,6 @@
 /*
  * File:   acquireTemp.c
- * Author: fafux
+ * Author: fafux & tori
  *
  * Created on 10 gennaio 2019, 16.19
  */
