@@ -58,8 +58,16 @@ int processMessage(char* type, char* payload){
         
         if (state != SAFE){
             sscanf("%d , %d", n1, n2);
-            if(refreshPWMvalue(n1, n2));
-            //send ACK
+            
+            if(refreshPWMvalue(n1, n2)){ //if return not zero error
+                //send ACK NEG (0)
+                send2pc("MCACK", "REF,0");
+            
+            } else {
+               send2pc("MCACK", "REF,1");
+            } 
+            
+            /** TODO */
             // blink led D3 and stop D4
             // state = CONTROL
         }
