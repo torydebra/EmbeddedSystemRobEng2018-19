@@ -13,9 +13,9 @@ typedef struct {
 	char msg_payload[100];  // assume payload cannot be longer than 100 chars
 	int index_type;
 	int index_payload;
-} parser_state;
+} Parser_state;
 
-int parse_byte(parser_state* ps, char byte);
+int parse_byte(Parser_state* ps, char byte);
 
 #endif	/* PARSER_H */
 

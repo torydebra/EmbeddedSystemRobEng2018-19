@@ -38,15 +38,17 @@
 #include "parser.h"
 #include "scheduler.h"
 
-heartbeat schedInfo[MAX_TASKS];
+Heartbeat schedInfo[MAX_TASKS];
+Buffer bufReceiving;
+Parser_state pstate;
+int boardState;
+
 setupBuffer();
 setupParser();
 
 int main(void) {
     
-
     setupUART2();
-    
     
     // main loop
     while (1) {

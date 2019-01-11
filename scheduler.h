@@ -6,7 +6,7 @@
 typedef struct {
 	int n;
 	int N;
-} heartbeat;
+} Heartbeat;
 
 void scheduler();
 

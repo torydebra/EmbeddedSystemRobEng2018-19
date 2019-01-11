@@ -1,6 +1,6 @@
 #include "parser.h"
 
-int parse_byte(parser_state* ps, char byte) {
+int parse_byte(Parser_state* ps, char byte) {
     switch (ps->state) {
         case STATE_DOLLAR:
             if (byte == '$') {
