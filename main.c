@@ -37,9 +37,11 @@
 #include "setupClass.h"
 #include "parser.h"
 #include "scheduler.h"
+#include "buffer.h"
 
 Heartbeat schedInfo[MAX_TASKS];
 Buffer bufReceiving;
+BufferTemp buff;
 Parser_state pstate;
 int boardState;
 
@@ -49,6 +51,7 @@ setupParser();
 int main(void) {
     
     setupUART2();
+    setupADC ();
     
     // main loop
     while (1) {

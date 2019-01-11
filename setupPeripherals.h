@@ -8,7 +8,7 @@
 #ifndef SETUPPERIPHERALS_H
 #define	SETUPPERIPHERALS_H
 
-
+void setupADC ();
 void setupUART2();
 
 #endif	/* SETUPPERIPHERALS_H */
