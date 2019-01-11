@@ -28,7 +28,7 @@ int readFromUartTask(void) {
     short int i = 0;
     short int retParse = 0;
     
-    for (i=0; i<MAX_CHAR_READ; i++){
+    for (i=0; i < MAX_CHAR_READ; i++){
         
         bufVal = readBuf(&buf);
         if (bufVal != 0) { // first check if there are characters to be read in the buffer 
@@ -64,7 +64,7 @@ int processMessage(char* type, char* payload){
                 send2pc("MCACK", "REF,0");
             
             } else {
-               send2pc("MCACK", "REF,1");
+                send2pc("MCACK", "REF,1");
             } 
             
             /** TODO */

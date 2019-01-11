@@ -7,13 +7,12 @@ void scheduler() {
 		if (schedInfo[i].n == schedInfo[i].N) {
 			switch(i) {
 				case 0:
-					recRef(); // t=100ms
+					//recRef(); // t=100ms
 					break;
 				case 1:
-					task2();
 					break;
 				case 2:
-					task3();
+
 					break;
 			}
 			schedInfo[i].n = 0;
