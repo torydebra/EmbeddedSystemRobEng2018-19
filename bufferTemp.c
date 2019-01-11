@@ -9,7 +9,7 @@
 
 void initBufTemp (BufferTemp *buffer){
     buffer->index = 0;
-    buffer->data = [0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0];
+    //buffer->data[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 }
 
 void writeBufTemp (BufferTemp *buffer, float c) {

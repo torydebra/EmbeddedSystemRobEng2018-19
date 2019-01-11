@@ -8,8 +8,17 @@
 #include <stdio.h>
 #include <string.h>
 #include "parser.h"
+#include "uart.h"
+#include "globalVar.h"
 
 #define MAX_CHAR_READ 25
+
+void __attribute__((__interrupt__, __auto_psv__)) _U2RXInterrupt () {
+    
+    IFS1bits.U2RXIF = 0; // reset interrupt flag
+    int val = U2RXREG;
+    writeBuf(&bufReceiving, val); // store value in buffer
+}
 
 int processMessage(char* type, char* payload){
     
@@ -18,7 +27,7 @@ int processMessage(char* type, char* payload){
     if (strcmp(type, "HLREF") == 0){
         
         //if (boardState != SAFE){
-            sscanf(payload, "%d,%d", n1, n2);
+            sscanf(payload, "%d,%d", &n1, &n2);
             
             //if(refreshPWMvalue(n1, n2)){ //if return not zero error
                 //send ACK NEG (0)
@@ -50,6 +59,7 @@ int processMessage(char* type, char* payload){
         // ERRROR
     }
 
+    return 0;
 }
 
 int readFromUartTask(void) {
@@ -69,8 +79,8 @@ int readFromUartTask(void) {
             value = U2RXREG; 
         }
         
-        c = sprintf("%c", value); //"convert" into the correspondend ascii
-        retParse = parse_byte(pstate, c);
+        c = value; //"convert" into the correspondend ascii
+        retParse = parse_byte(&pstate, c);
         
         if (retParse == NEW_MESSAGE){
             processMessage(pstate.msg_type, pstate.msg_payload);

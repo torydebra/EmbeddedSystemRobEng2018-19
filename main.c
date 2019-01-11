@@ -33,11 +33,12 @@
 // Use project enums instead of #define for ON and OFF.
 
 #include <xc.h>
-#include "setupPeripherals.h"
+#include "temperature.h"
 #include "setupClass.h"
 #include "parser.h"
 #include "scheduler.h"
 #include "buffer.h"
+#include "bufferTemp.h"
 
 Heartbeat schedInfo[MAX_TASKS];
 Buffer bufReceiving;
@@ -46,12 +47,14 @@ Parser_state pstate;
 int boardState;
 
 setupBuffer();
+setupBufferTemp();
 setupParser();
 
 int main(void) {
     
     setupUART2();
-    setupADC ();
+    setupADCtemp ();
+    setupLCD();
     
     // main loop
     while (1) {

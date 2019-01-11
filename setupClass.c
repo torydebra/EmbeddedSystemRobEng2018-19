@@ -1,6 +1,7 @@
 #include "setupClass.h"
 #include "parser.h"
 #include "buffer.h"
+#include "globalVar.h"
 
 void setupParser(){
 	pstate.state = STATE_DOLLAR;
@@ -9,6 +10,9 @@ void setupParser(){
 }
 
 void setupBuffer(){
-    initBuf(bufReceiving);
-    
+    initBuf(&bufReceiving);   
+}
+
+void setupBufferTemp(){
+    initBufTemp(&buff);
 }

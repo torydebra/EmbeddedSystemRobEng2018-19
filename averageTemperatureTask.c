@@ -1,4 +1,5 @@
 #include "bufferTemp.h"
+#include "globalVar.h"
 
 float averageTemp() {
     
@@ -6,7 +7,7 @@ float averageTemp() {
     int i = 0;
     
     for (i=0; i < DIMBUFTEMP; i++){
-        average = (average + buff.data[i]);
+       average = (average + buff.data[i]);
     }
     average = average/DIMBUFTEMP;
     

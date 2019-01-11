@@ -1,6 +1,7 @@
-#include "setupPeripherals.h"
+#include "temperature.h"
+#include "xc.h"
 
-void setupADC () {
+void setupADCtemp () {
     
     // min tad is 154ns
     ADCON3bits.ADCS = 63; // tad at the maximum for circuital problems 
@@ -21,10 +22,11 @@ void setupADC () {
     ADCON1bits.ADON = 1;
 }
 
-void setupUART2(){
-    // max baud rate 110 kbps with our fcy
-    // 57600 baud rate max for our pc software
-    U2BRG = 1; // (7372800 / 4) / (16 * 57600) - 1
-    U2MODEbits.UARTEN = 1; // enable UART
-    U2STAbits.UTXEN = 1; // enable U2TX (must be after UARTEN)
+int acqTemp() {
+    double temp = 0;
+    
+    if (ADCON1bits.DONE) { // if ADC conversion completed
+        temp = 500.0/1023.0*ADCBUF1 - 50.0;
+        return temp;
+    }
 }
