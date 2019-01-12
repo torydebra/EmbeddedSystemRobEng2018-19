@@ -49,12 +49,13 @@ BufferTemp buff;
 Parser_state pstate;
 int boardState;
 
-setupBuffer();
-setupBufferTemp();
-setupParser();
-
 int main(void) {
+    //initialize data structures
+    setupBuffer();
+    setupBufferTemp();
+    setupParser();
     
+    //initialize peripherals
     setupUART2();
     setupADCtemp ();
     setupLCD();
