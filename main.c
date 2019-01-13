@@ -47,7 +47,7 @@ Heartbeat schedInfo[MAX_TASKS];
 Buffer bufReceiving;
 BufferTemp buff;
 Parser_state pstate;
-int boardState;
+int boardState = 0;
 
 int main(void) {
     //initialize data structures

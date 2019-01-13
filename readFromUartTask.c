@@ -55,36 +55,36 @@ int processMessage(char* type, char* payload){
     
     if (strcmp(type, "HLREF") == 0){
         
-        //if (boardState != SAFE){
-            sscanf(payload, "%d,%d", &n1, &n2);
+        if (boardState != STATE_SAFE){
             
-            //if(refreshPWMvalue(n1, n2)){ //if return not zero error
-                //send ACK NEG (0)
-                //send2pc("MCACK", "REF,0");
+            boardState = STATE_CONTROL; //exit timeout mode
+            sscanf(payload, "%d,%d", &n1, &n2);     
+            if(refreshPWMvalue(n1, n2)){
+                //send ACK POS (0)
+                return REF_1         
+            } else {              
+                return REF_0            
+            } 
             
-            //} else {
-                
-            //} 
-            
-            /** TODO */
+            /** TODO qui??? */
             // blink led D3 and stop D4
-            // state = CONTROL
-        //}
-        return REF_1;
+        }
     
     } else if (strcmp(type, "HLSAT") == 0){
         
-        //sscanf("%d , %d", min, max); //TDODODODOAds
-        //if(refreshPWMrange(min,max));
-        //send ACK
-        return SAT_1;
+        sscanf("%d , %d", min, max); //TDODODODOAds
+        if(refreshPWMrange(min,max)){
+            return SAT_1;
+        } else {
+            return SAT_0;
+        }
     
     } else if(strcmp(type, "HLENA") == 0) {
-       //if (state == SAFE){
+        if (state == STATE_SAFE){
         //refreshPWMvalue(0,0);
         //state = CONTROL;
         //send ACK
-        //}
+        }
         return ENA_1;
         
     } else{
