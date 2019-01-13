@@ -43,11 +43,15 @@
 #include "timer.h"
 #include "uart.h"
 
+#define STATE_CONTROL 0
+#define STATE_TIMEOUT 1
+#define STATE_SAFE 2
+
 Heartbeat schedInfo[MAX_TASKS];
 Buffer bufReceiving;
 BufferTemp buff;
 Parser_state pstate;
-int boardState = 0;
+int boardState = STATE_CONTROL;
 
 int main(void) {
     //initialize data structures

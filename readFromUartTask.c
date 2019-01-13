@@ -73,19 +73,21 @@ int processMessage(char* type, char* payload){
     } else if (strcmp(type, "HLSAT") == 0){
         
         sscanf("%d , %d", min, max); //TDODODODOAds
-        if(refreshPWMrange(min,max)){
+        if(refreshPWMRange(min,max)){
             return SAT_1;
         } else {
             return SAT_0;
         }
     
     } else if(strcmp(type, "HLENA") == 0) {
-        if (state == STATE_SAFE){
-        //refreshPWMvalue(0,0);
-        //state = CONTROL;
-        //send ACK
+        if (boardState == STATE_SAFE){
+            //refreshPWMvalue(0,0);
+            //state = CONTROL;
+            //send ACK
+        } else {
+            return ENA_0;
         }
-        return ENA_1;
+        
         
     } else{
         //error
