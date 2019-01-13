@@ -69,7 +69,7 @@ int processMessage(char* type, char* payload){
     
     } else if (strcmp(type, "HLSAT") == 0){
         
-        sscanf(payload, "%d,%d", min, max);
+        sscanf(payload, "%d,%d", &min, &max);
         if(!refreshPWMRange(min,max)){
             if (!refreshPWMvalue(appliedN1, appliedN2)){
                 return SAT_1;
@@ -141,7 +141,6 @@ void updateLCD(int retProc){
         moveCursor(2,1);
         writeStringLCD(strLCD);
         moveCursor(1,1);
-    } else if (retProc == )
-    
-
+        writeStringLCD("STA:C"); //to possible notify exit from timeout
+    } 
 }
