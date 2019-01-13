@@ -1,6 +1,7 @@
 #include "globalVar.h"
 #include "scheduler.h"
-
+#include "acquireTemperatureTask.h"
+#include "averageTemperatureTask.h"
 #include "readFromUartTask.h"
 
 
@@ -11,6 +12,7 @@ void initHeartbeat(){
     }
 
     schedInfo[0].N = 1;
+    schedInfo[1].N = 10;
   
 }
 
@@ -21,9 +23,10 @@ void scheduler() {
 		if (schedInfo[i].n == schedInfo[i].N) {
 			switch(i) {
 				case 0:
-					readFromUartTask();
+					acquireTemperatureTask();
 					break;
 				case 1:
+                    averageTemperatureTask();
 					break;
 				case 2:
 					break;

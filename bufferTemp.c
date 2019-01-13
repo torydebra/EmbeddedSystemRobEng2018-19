@@ -6,13 +6,14 @@
  */
 
 #include "bufferTemp.h"
+#include "globalVar.h"
 
-void initBufTemp (BufferTemp *buffer){
-    buffer->index = 0;
+void initBufTemp (){
+    buff.index = 0;
     //buffer->data[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 }
 
-void writeBufTemp (BufferTemp *buffer, float c) {
-    buffer->data[buffer->index] = c;
-    buffer->index = (buffer->index + 1) % DIMBUFTEMP;
+void writeBufTemp (float c) {
+    buff.data[buff.index] = c;
+    buff.index = (buff.index + 1) % DIMBUFTEMP;
 }

@@ -12,7 +12,7 @@
 int sendFBKTask(void) {
     
     char fbk[20];
-    sprintf(fbk, "$MCFBK,%d,%d,%d", appliedN1, appliedN2, boardState);
+    sprintf(fbk, "MCFBK,%d,%d,%d", appliedN1, appliedN2, boardState);
     send2pc(fbk);
     
     return 0;

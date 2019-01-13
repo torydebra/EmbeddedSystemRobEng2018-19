@@ -1,5 +1,5 @@
 /* 
- * File:   setupPeripherals.h
+ * File:   temperature.h
  * Author: tori & fafux
  *
  * Created on 11 gennaio 2019, 11.49
@@ -9,7 +9,7 @@
 #define	TEMPERATURE_H
 
 void setupADCtemp ();
-int acqTemp();
+float acqTemp();
 
 #endif	/* TEMPERATURE_H */
 

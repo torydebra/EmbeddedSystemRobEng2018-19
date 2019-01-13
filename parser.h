@@ -15,6 +15,7 @@ typedef struct {
 	int index_payload;
 } Parser_state;
 
+void setupParser();
 int parse_byte(Parser_state* ps, char byte);
 
 #endif	/* PARSER_H */

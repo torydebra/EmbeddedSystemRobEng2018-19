@@ -34,7 +34,6 @@
 
 #include <xc.h>
 #include "temperature.h"
-#include "setupClass.h"
 #include "parser.h"
 #include "scheduler.h"
 #include "buffer.h"
@@ -61,14 +60,14 @@ int appliedN2 = 0;
 
 int main(void) {
     //initialize data structures
-    setupBuffer();
-    setupBufferTemp();
+    initBuf(&bufReceiving);
+    initBufTemp();
     setupParser();
     initHeartbeat();
     
     //initialize peripherals
     setupUART2();
-    setupADCtemp ();
+    setupADCtemp();
     setupLCD();
     
     // main loop

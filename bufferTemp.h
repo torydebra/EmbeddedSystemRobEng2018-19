@@ -8,9 +8,9 @@ typedef struct {
     int index;
 } BufferTemp;
 
-void initBufTemp (BufferTemp *buffer);
+void initBufTemp ();
 
-void writeBufTemp (BufferTemp *buffer, float c);
+void writeBufTemp (float c);
 
 
 

@@ -14,7 +14,7 @@
 #include "readFromUartTask.h"
 #include "pwm.h"
 
-int sendMC(int retProc){
+void sendMC(short int retProc){
 
     switch(retProc){
         
@@ -39,6 +39,7 @@ int sendMC(int retProc){
         default:
             break;            
     }
+    return;
 }
 
 int processMessage(char* type, char* payload){
@@ -132,7 +133,7 @@ int readFromUartTask(void) {
    return 0;
 }
 
-void updateLCD(int retProc){
+void updateLCD(short int retProc){
 
     //if A new ref arrives, update LCD
     if (retProc == REF_1){

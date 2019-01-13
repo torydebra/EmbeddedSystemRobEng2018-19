@@ -1,0 +1,7 @@
+#ifndef ACQUIRETEMPERATURETASK_H
+#define	ACQUIRETEMPERATURETASK_H
+
+void acquireTemperatureTask ();
+
+#endif	/* ACQUIRETEMPERATURETASK_H */
+

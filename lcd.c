@@ -1,5 +1,6 @@
 #include "lcd.h"
 #include "timer.h"
+#include <xc.h>
 
 void writeCharLCD(char word) {
     
@@ -23,9 +24,9 @@ void moveCursor(int row, int column){
     }
     
     if (row == 1){
-        SPI1BUF = 0x80 + column;
+        SPI1BUF = 0x80 + column-1;
     } else{
-        SPI1BUF = 0xC0 + column;
+        SPI1BUF = 0xC0 + column-1;
     }
     return;
     
