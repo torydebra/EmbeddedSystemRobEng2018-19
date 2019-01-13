@@ -2,7 +2,7 @@
 #include "xc.h"
 #include "lcd.h"
 
-void setupADCtemp () {
+void setupADCtemp() {
     
     // min tad is 154ns
     ADCON3bits.ADCS = 63; // tad at the maximum for circuital problems 
@@ -28,8 +28,6 @@ float acqTemp() {
     
     if (ADCON1bits.DONE) { // if ADC conversion completed
         temp = 500.0/1023.0*ADCBUF0 - 50.0;
-        char c = ADCBUF0 + '0';
-        writeCharLCD(c);
         return temp;
     }
     

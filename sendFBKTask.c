@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include "xc.h"
 #include "globalVar.h"
+#include "uart.h"
 
 int sendFBKTask(void) {
     
