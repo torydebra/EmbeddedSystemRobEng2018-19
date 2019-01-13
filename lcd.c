@@ -1,12 +1,34 @@
 #include "lcd.h"
 #include "timer.h"
 
-void writeLCD(char word) {
-    //int i = 0;
-    //for (i=0; word[i] != '\0'; i++) {
+void writeCharLCD(char word) {
+    
+    while(SPI1STATbits.SPITBF == 1); // wait until not full
+    SPI1BUF = word;
+
+}
+
+void writeStringLCD(char* str){
+    int i = 0;
+    for (i=0; str[i] != '\0'; i++) {
         while(SPI1STATbits.SPITBF == 1); // wait until not full
-        SPI1BUF = word;
-    //}
+        SPI1BUF = str[i];
+    }
+}
+
+void moveCursor(int row, int column){
+    
+    if (row < 1 || row > 2 || column < 1 || column > 16){
+        return ;
+    }
+    
+    if (row == 1){
+        SPI1BUF = 0x80 + column;
+    } else{
+        SPI1BUF = 0xC0 + column;
+    }
+    return;
+    
 }
 
 void setupLCD() {
