@@ -54,6 +54,7 @@ int main(void) {
     setupBuffer();
     setupBufferTemp();
     setupParser();
+    initHeartbeat();
     
     //initialize peripherals
     setupUART2();
@@ -64,7 +65,7 @@ int main(void) {
     while (1) {
         
         scheduler();
-        
+   
         //tmr_waitperiod;
         
     }

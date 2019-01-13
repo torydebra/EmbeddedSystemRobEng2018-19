@@ -32,7 +32,7 @@ void setupUART2(){
     U2STAbits.UTXEN = 1; // enable U2TX (must be after UARTEN)
     
     IEC1bits.U2RXIE = 1; // enable interrupt
-    U2STAbits.URXISEL = 10; // interrupt arrives when UART2 receiver is 3/4 full
+    U2STAbits.URXISEL = 0b10; // interrupt arrives when UART2 receiver is 3/4 full
 }
 
 void __attribute__((__interrupt__, __auto_psv__)) _U2RXInterrupt () {

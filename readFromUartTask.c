@@ -62,29 +62,43 @@ int readFromUartTask(void) {
     char c;
     short int i = 0;
     short int retParse = 0;
+    short int arrived = 0;
     
     for (i=0; i < MAX_CHAR_READ; i++){
-        
+        arrived = 0;
         int bufVal = readBuf(&bufReceiving);
         if (bufVal != 0) { // first check if there are characters to be read in the buffer
             value = bufVal;
             c=value;
             writeLCD(c);
+            arrived = 1;
 
         } else if (U2STAbits.URXDA == 1) { //notifies if there are characters to be read    
             value = U2RXREG; 
             c=value;
             writeLCD(c);
+            arrived = 1;
         }
         
-        c = value; //"convert" into the correspondend ascii
-        //retParse = parse_byte(&pstate, c);
-        
-        
-        
-        if (retParse == NEW_MESSAGE){
-            processMessage(pstate.msg_type, pstate.msg_payload);
-        }         
+        if (arrived){
+            //c = value; //"convert" into the correspondend ascii
+            retParse = parse_byte(&pstate, c);
+            
+//            if (pstate.state >2){
+//            char x = pstate.state + '0';
+//            writeLCD(x);
+//            }
+//            int i = 0;
+//            for (i =0; i<10; i++){
+//                writeLCD(pstate.msg_payload[i]);
+//            }
+            
+
+            if (retParse == NEW_MESSAGE){
+                writeLCD('K');
+                processMessage(pstate.msg_type, pstate.msg_payload);
+            } 
+        }        
         
     }
    

@@ -29,4 +29,6 @@ int acqTemp() {
         temp = 500.0/1023.0*ADCBUF1 - 50.0;
         return temp;
     }
+    
+    return 0;
 }

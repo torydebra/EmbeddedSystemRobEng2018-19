@@ -1,7 +1,10 @@
-#include "scheduler.h"
 #include "globalVar.h"
+#include "scheduler.h"
 
-void initHeartbeat(Heartbeat* schedInfo){
+#include "readFromUartTask.h"
+
+
+void initHeartbeat(){
     int i = 0;
     for (i = 0; i < MAX_TASKS; i++){
         schedInfo[i].n = 0;        
