@@ -10,6 +10,7 @@
 
 int processMessage(char* type, char* payload);
 int readFromUartTask(void);
+int sendMC(int retProc);
 
 #endif	/* READFROMUARTTASK_H */
 

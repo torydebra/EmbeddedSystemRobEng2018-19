@@ -5,20 +5,27 @@
 #include <stdio.h>
 #include <string.h>
 
-int send2pc(char* type, char* payload){
+int send2pc(char* msg){
     
-    if (strlen(type) + strlen(payload) > 30){
+    if (strlen(msg) > 30){
         return -1;
     }
     
     char toSend[30];
     
-    sprintf(toSend, "$%s,%s*", type, payload);
+    sprintf(toSend, "$%s*", msg);
     int i = 0;
     for (i=0; i<strlen(toSend); i++){
-        if (!U2STAbits.UTXBF){
+        if (!U2STAbits.UTXBF){ //check if buffer not full
             U2TXREG = toSend[i];
-        }       
+        }
+ 
+        while(U2STAbits.UTXBF){
+            //wait until buffer not anymore full
+        }
+        //reset overflow bit AFTER waiting for not full buf (if it was full)
+        U2STAbits.OERR = 0; 
+        
     }
      
     return 0;
