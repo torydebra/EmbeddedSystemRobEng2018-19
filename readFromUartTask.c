@@ -11,16 +11,8 @@
 #include "uart.h"
 #include "globalVar.h"
 #include "lcd.h"
-
-#define MAX_CHAR_READ 25
-//def of return int of processMessage
-#define ERROR 0
-#define REF_0 1
-#define REF_1 2
-#define SAT_0 3
-#define SAT_1 4
-#define ENA_0 5
-#define ENA_1 6
+#include "readFromUartTask.h"
+#include "pwm.h"
 
 int sendMC(int retProc){
 
@@ -57,13 +49,18 @@ int processMessage(char* type, char* payload){
         
         if (boardState != STATE_SAFE){
             
-            boardState = STATE_CONTROL; //exit timeout mode
+            if (boardState == STATE_TIMEOUT){
+                boardState = STATE_CONTROL; //exit timeout mode
+            }
             sscanf(payload, "%d,%d", &n1, &n2);     
-            if(refreshPWMvalue(n1, n2)){
-                //send ACK POS (0)
-                return REF_1         
+            if(!refreshPWMvalue(n1, n2)){
+                appliedN1 = n1;
+                appliedN2 = n2;
+                
+                //send ACK POS (1)
+                return REF_1;         
             } else {              
-                return REF_0            
+                return REF_0;            
             } 
             
             /** TODO qui??? */
@@ -72,23 +69,23 @@ int processMessage(char* type, char* payload){
     
     } else if (strcmp(type, "HLSAT") == 0){
         
-        sscanf("%d , %d", min, max); //TDODODODOAds
-        if(refreshPWMRange(min,max)){
-            return SAT_1;
-        } else {
-            return SAT_0;
-        }
+        sscanf(payload, "%d,%d", min, max);
+        if(!refreshPWMRange(min,max)){
+            if (!refreshPWMvalue(appliedN1, appliedN2)){
+                return SAT_1;
+            } 
+        } 
+        
+        return SAT_0; //error
+        
     
     } else if(strcmp(type, "HLENA") == 0) {
         if (boardState == STATE_SAFE){
-            //refreshPWMvalue(0,0);
-            //state = CONTROL;
-            //send ACK
+            boardState = STATE_CONTROL;
+            return ENA_1;
         } else {
             return ENA_0;
-        }
-        
-        
+        } 
     } else{
         //error
     }

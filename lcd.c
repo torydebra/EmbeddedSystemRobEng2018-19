@@ -2,7 +2,7 @@
 #include "timer.h"
 
 void writeLCD(char word) {
-    int i = 0;
+    //int i = 0;
     //for (i=0; word[i] != '\0'; i++) {
         while(SPI1STATbits.SPITBF == 1); // wait until not full
         SPI1BUF = word;
