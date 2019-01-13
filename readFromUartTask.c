@@ -117,13 +117,14 @@ int readFromUartTask(void) {
              
         if (arrived){
             c = value; //"convert" into the correspondend ascii
-            writeLCD(c);
+            writeCharLCD(c);
             retParse = parse_byte(&pstate, c);
            
             if (retParse == NEW_MESSAGE){
-                writeLCD('K');
+                writeCharLCD('K');
                 retProc = processMessage(pstate.msg_type, pstate.msg_payload);
                 sendMC(retProc);
+                updateLCD(retProc);
             } 
         }        
     }
@@ -131,3 +132,16 @@ int readFromUartTask(void) {
    return 0;
 }
 
+void updateLCD(int retProc){
+
+    //if A new ref arrives, update LCD
+    if (retProc == REF_1){
+        char strLCD[16];
+        sprintf(strLCD, "RPM: %d,%d", appliedN1, appliedN2);
+        moveCursor(2,1);
+        writeStringLCD(strLCD);
+        moveCursor(1,1);
+    } else if (retProc == )
+    
+
+}
