@@ -46,12 +46,18 @@
 #define STATE_CONTROL 0
 #define STATE_TIMEOUT 1
 #define STATE_SAFE 2
+#define MAX_SAFE_VEL 8000
+#define MIN_SAFE_VEL -8000
 
 Heartbeat schedInfo[MAX_TASKS];
 Buffer bufReceiving;
 BufferTemp buff;
 Parser_state pstate;
-int boardState = STATE_CONTROL;
+short int boardState = STATE_CONTROL;
+int maxRPM = MAX_SAFE_VEL;
+int minRPM = MIN_SAFE_VEL;
+int appliedN1 = 0;
+int appliedN2 = 0;
 
 int main(void) {
     //initialize data structures
