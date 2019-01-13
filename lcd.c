@@ -24,8 +24,10 @@ void moveCursor(int row, int column){
     }
     
     if (row == 1){
+        while(SPI1STATbits.SPITBF == 1);
         SPI1BUF = 0x80 + column-1;
     } else{
+        while(SPI1STATbits.SPITBF == 1);
         SPI1BUF = 0xC0 + column-1;
     }
     return;

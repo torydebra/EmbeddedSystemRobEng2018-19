@@ -12,7 +12,8 @@ void initHeartbeat(){
     }
 
     schedInfo[0].N = 1;
-    schedInfo[1].N = 10;
+    schedInfo[1].N = 1;
+    schedInfo[2].N = 10;
   
 }
 
@@ -23,12 +24,13 @@ void scheduler() {
 		if (schedInfo[i].n == schedInfo[i].N) {
 			switch(i) {
 				case 0:
-					acquireTemperatureTask();
+					//readFromUartTask();
 					break;
 				case 1:
-                    averageTemperatureTask();
+                    acquireTemperatureTask();
 					break;
 				case 2:
+                    averageTemperatureTask();
 					break;
 			}
 			schedInfo[i].n = 0;

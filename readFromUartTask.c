@@ -54,7 +54,7 @@ int processMessage(char* type, char* payload){
                 boardState = STATE_CONTROL; //exit timeout mode
             }
             sscanf(payload, "%d,%d", &n1, &n2);     
-            if(!refreshPWMvalue(n1, n2)){
+            if(!refreshPWMvalue(&n1, &n2)){
                 appliedN1 = n1;
                 appliedN2 = n2;
                 
@@ -72,7 +72,7 @@ int processMessage(char* type, char* payload){
         
         sscanf(payload, "%d,%d", &min, &max);
         if(!refreshPWMRange(min,max)){
-            if (!refreshPWMvalue(appliedN1, appliedN2)){
+            if (!refreshPWMvalue(&appliedN1, &appliedN2)){
                 return SAT_1;
             } 
         } 
@@ -118,11 +118,9 @@ int readFromUartTask(void) {
              
         if (arrived){
             c = value; //"convert" into the correspondend ascii
-            writeCharLCD(c);
             retParse = parse_byte(&pstate, c);
            
             if (retParse == NEW_MESSAGE){
-                writeCharLCD('K');
                 retProc = processMessage(pstate.msg_type, pstate.msg_payload);
                 sendMC(retProc);
                 updateLCD(retProc);
@@ -138,7 +136,7 @@ void updateLCD(short int retProc){
     //if A new ref arrives, update LCD
     if (retProc == REF_1){
         char strLCD[16];
-        sprintf(strLCD, "RPM: %d,%d", appliedN1, appliedN2);
+        sprintf(strLCD, "RPM:%d,%d", appliedN1, appliedN2);
         moveCursor(2,1);
         writeStringLCD(strLCD);
         moveCursor(1,1);

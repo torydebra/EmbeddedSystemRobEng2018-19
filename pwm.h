@@ -6,7 +6,7 @@
 
 void setupPWM ();
 int saturateRPM(int n);
-int refreshPWMvalue(int n1, int n2);
+int refreshPWMvalue(int* n1, int* n2);
 short int refreshPWMRange(int min, int max);
 int sign(int x);
 

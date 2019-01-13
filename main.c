@@ -70,14 +70,20 @@ int main(void) {
     setupADCtemp();
     setupLCD();
     
+    //set timer for scheduler
+    int heartbeat_time = 100;
+    tmr1_setup_period(heartbeat_time);
+    
+    
     // main loop
     while (1) {
         
         scheduler();
-   
-        //tmr_waitperiod;
         
-    }
+        if(tmr1_wait_period()){
+            writeStringLCD("hb expired!");
+        }
+    }   
     
     return 0;
 }

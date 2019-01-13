@@ -40,10 +40,10 @@ void tmr1_setup_period(int ms) {
 
 }
 
-void tmr1_wait_period(){
+int tmr1_wait_period(){
     
     if (IFS0bits.T1IF == 1) { //check if the timer has expired
-        exit (-1); //ERROR
+        return -1; //ERROR
     }
         
     while(IFS0bits.T1IF == 0){
@@ -51,4 +51,5 @@ void tmr1_wait_period(){
     }
     
     IFS0bits.T1IF = 0; //set the flag = 0
+    return 0;
 }

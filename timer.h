@@ -7,7 +7,7 @@
 
 int set_prescaler(int ms, int *tckps);
 void tmr1_setup_period(int ms);
-void tmr1_wait_period();
+int tmr1_wait_period();
 
 #endif	/* TIMER_H */
 

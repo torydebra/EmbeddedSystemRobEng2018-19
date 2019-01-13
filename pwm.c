@@ -33,13 +33,13 @@ int saturateRPM(int n) {
     return n;
 }
 
-int refreshPWMvalue(int n1, int n2) {
+int refreshPWMvalue(int* n1, int* n2) {
     
-    n1 = saturateRPM(n1);
-    n2 = saturateRPM(n2);
+    *n1 = saturateRPM(*n1);
+    *n2 = saturateRPM(*n2);
     
-    PDC2 = ((n1 - MIN_ABS) * 2*PTPER)/(MAX_ABS - MIN_ABS);
-    PDC3 = ((n2 - MIN_ABS) * 2*PTPER)/(MAX_ABS - MIN_ABS);
+    PDC2 = ((*n1 - MIN_ABS) * 2*PTPER)/(MAX_ABS - MIN_ABS);
+    PDC3 = ((*n2 - MIN_ABS) * 2*PTPER)/(MAX_ABS - MIN_ABS);
     
     return 0;
 }
