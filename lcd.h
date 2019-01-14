@@ -7,6 +7,7 @@ void writeCharLCD(char word);
 void writeStringLCD(char* str);
 void moveCursor(int row, int column);
 void setupLCD();
+void clearLCD(short int row);
 
 #endif	/* LCD_H */
 
