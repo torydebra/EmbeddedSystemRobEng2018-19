@@ -54,7 +54,7 @@ Heartbeat schedInfo[MAX_TASKS];
 Buffer bufReceiving;
 BufferTemp buff;
 Parser_state pstate;
-volatile short int boardState = STATE_CONTROL;
+short int boardState = STATE_CONTROL;
 int maxRPM = MAX_SAFE_VEL;
 int minRPM = MIN_SAFE_VEL;
 int appliedN1 = 0;
