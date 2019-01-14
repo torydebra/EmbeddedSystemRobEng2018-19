@@ -13,6 +13,7 @@
 #include "lcd.h"
 #include "readFromUartTask.h"
 #include "pwm.h"
+#include "timer.h"
 
 int readFromUartTask(void) {
  
@@ -57,8 +58,12 @@ int processMessage(char* type, char* payload){
     if (strcmp(type, "HLREF") == 0){
  
         if (boardState != STATE_SAFE){
+            tmr2_reset_timer();
             
             if (boardState == STATE_TIMEOUT){
+                tmr2_start_timer();
+                moveCursor(1,1);
+                writeStringLCD("STA:C"); //to possible notify exit from timeout
                 boardState = STATE_CONTROL; //exit timeout mode
             }
             sscanf(payload, "%d,%d", &n1, &n2);     
@@ -75,6 +80,7 @@ int processMessage(char* type, char* payload){
             /** TODO qui??? */
             // blink led D3 and stop D4
         }
+        return REF_0; //safe mode does not accept new references
     
     } else if (strcmp(type, "HLSAT") == 0){
         
@@ -89,6 +95,15 @@ int processMessage(char* type, char* payload){
     } else if(strcmp(type, "HLENA") == 0) {
         if (boardState == STATE_SAFE){
             boardState = STATE_CONTROL;
+            
+            //re-enable interrupts
+            tmr2_start_timer(); //timer for timeout mode
+            IEC0bits.INT0IE = 1; //Button S5 for safe mode
+            IEC1bits.INT1IE = 1; //Button S6 for safe mode
+            
+            moveCursor(1,1);
+            writeStringLCD("STA:C"); //to possible notify exit from timeout
+
             return ENA_1;
         } else {
             return ENA_0;
@@ -104,18 +119,11 @@ void updateLCD(short int retProc){
 
     char strLCD[16];
     //if A new ref arrives, update LCD
-    if (retProc == REF_1){     
+    if (retProc == REF_1 || retProc == SAT_1){     
         sprintf(strLCD, "RPM:%d,%d", appliedN1, appliedN2);
         clearLCD(2);
         moveCursor(2,1);
         writeStringLCD(strLCD);
-        moveCursor(1,1);
-        writeStringLCD("STA:C"); //to possible notify exit from timeout
-    } else if (retProc == SAT_1){
-        sprintf(strLCD, "RPM:%d,%d", appliedN1, appliedN2);
-        clearLCD(2);
-        moveCursor(2,1);
-        writeStringLCD(strLCD);   
     }
 }
 

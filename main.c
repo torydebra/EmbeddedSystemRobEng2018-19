@@ -72,7 +72,7 @@ int main(void) {
     
     //set timer for scheduler
     int heartbeat_time = 100;
-    tmr1_setup_period(heartbeat_time);    
+    tmr1_setup_period(heartbeat_time);
     
     // main loop
     while (1) {
