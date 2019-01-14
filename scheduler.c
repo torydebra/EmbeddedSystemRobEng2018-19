@@ -3,6 +3,7 @@
 #include "acquireTemperatureTask.h"
 #include "averageTemperatureTask.h"
 #include "readFromUartTask.h"
+#include "sendFBKTask.h"
 
 
 void initHeartbeat(){
@@ -12,8 +13,9 @@ void initHeartbeat(){
     }
 
     schedInfo[0].N = 1;
-    schedInfo[1].N = 1;
+    schedInfo[1].N = 1; 
     schedInfo[2].N = 10;
+    schedInfo[3].N = 2;
   
 }
 
@@ -32,6 +34,9 @@ void scheduler() {
 				case 2:
                     averageTemperatureTask();
 					break;
+                case 3:
+                    sendFBKTask();
+                    break;
 			}
 			schedInfo[i].n = 0;
 		}

@@ -1,7 +1,7 @@
 #ifndef SCHEDULER_H
 #define	SCHEDULER_H
 
-#define MAX_TASKS (3)
+#define MAX_TASKS (4)
 
 typedef struct {
 	int n;

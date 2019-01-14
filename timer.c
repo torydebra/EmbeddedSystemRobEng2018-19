@@ -40,6 +40,21 @@ void tmr1_setup_period(int ms) {
 
 }
 
+void tmr2_setup_period(int ms) {
+    T2CONbits.TON = 0;
+    TMR2 = 0;
+    IFS0bits.T2IF = 0;
+    
+    int t2tckps = 0;
+
+    PR2 = set_prescaler(ms, &(t2tckps));
+    
+    T2CONbits.TCKPS = t2tckps;
+    
+    T2CONbits.TON = 1;
+
+}
+
 int tmr1_wait_period(){
     
     if (IFS0bits.T1IF == 1) { //check if the timer has expired
@@ -51,5 +66,19 @@ int tmr1_wait_period(){
     }
     
     IFS0bits.T1IF = 0; //set the flag = 0
+    return 0;
+}
+
+int tmr2_wait_period(){
+    
+    if (IFS0bits.T2IF == 1) { //check if the timer has expired
+        return -1; //ERROR
+    }
+        
+    while(IFS0bits.T2IF == 0){
+        // Wait for the flag
+    }
+    
+    IFS0bits.T2IF = 0; //set the flag = 0
     return 0;
 }
