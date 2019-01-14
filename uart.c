@@ -49,4 +49,5 @@ void __attribute__((__interrupt__, __auto_psv__)) _U2RXInterrupt () {
     IFS1bits.U2RXIF = 0; // reset interrupt flag
     int val = U2RXREG;
     writeBuf(&bufReceiving, val); // store value in buffer
+
 }

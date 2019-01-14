@@ -4,7 +4,7 @@
  *
  * Created on 11 gennaio 2019, 10.04
  */
-
+#include "xc.h"
 #include "buffer.h"
 
 void initBuf (Buffer *buffer){
@@ -14,18 +14,21 @@ void initBuf (Buffer *buffer){
 
 void writeBuf (Buffer *buffer, int c) {
     if (buffer->tail < DIMBUF) {
-        buffer->data[buffer->head] = c;
+        buffer->data[buffer->tail] = c;
         buffer->tail = (buffer->tail + 1) % DIMBUF;
     }
 }
 
-int readBuf (Buffer *buffer) {
+int readBuf (Buffer *buffer, int* value) {
+    IEC1bits.U2RXIE = 0; // disable interrupt
     if (buffer->tail == buffer->head) {
-        return 0; // queue is empty
+        IEC1bits.U2RXIE = 1; 
+        return -1; // queue is empty (TODO OR FULL...)
     }
     else {
-        int value = buffer->data[buffer->head];
+        *value = buffer->data[buffer->head];
         buffer->head = (buffer->head + 1) % DIMBUF;
-        return value;
+        IEC1bits.U2RXIE = 1; 
+        return 0;
     }
 }

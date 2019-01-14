@@ -26,7 +26,7 @@ void scheduler() {
 		if (schedInfo[i].n == schedInfo[i].N) {
 			switch(i) {
 				case 0:
-					//readFromUartTask();
+					readFromUartTask();
 					break;
 				case 1:
                     acquireTemperatureTask();

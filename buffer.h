@@ -13,7 +13,7 @@ void initBuf (Buffer *buffer);
 
 void writeBuf (Buffer *buffer, int c);
 
-int readBuf (Buffer *buffer);
+int readBuf (Buffer *buffer, int* value);
 
 
 #endif	/* BUFFER_H */
