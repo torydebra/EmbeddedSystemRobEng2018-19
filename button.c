@@ -1,5 +1,6 @@
 #include <xc.h>
 #include "globalVar.h"
+#include "lcd.h"
 
 void __attribute__((__interrupt__, __auto_psv__)) _INT0Interrupt () {
     
@@ -41,4 +42,9 @@ void __attribute__((__interrupt__, __auto_psv__)) _INT1Interrupt () {
     writeStringLCD("STA:H");
     
     IEC1bits.U2RXIE = 1; //enable interrupt for UART buffer
+}
+
+void setupButton() {
+    IEC0bits.INT0IE = 1; //enable interrupt for S5 button
+    IEC1bits.INT1IE = 1; //enable interrupt for S6 button
 }
