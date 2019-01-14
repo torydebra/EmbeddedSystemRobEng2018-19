@@ -58,5 +58,7 @@ short int refreshPWMRange(int min, int max) {
         return 1;
     }
 
+    minRPM = min;
+    maxRPM = max;
     return 0;
 }
