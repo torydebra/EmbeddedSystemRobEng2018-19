@@ -16,6 +16,9 @@ void __attribute__((__interrupt__, __auto_psv__)) _INT0Interrupt () {
     
     boardState = STATE_SAFE;
     
+    moveCursor(1,1);
+    writeStringLCD("STA:H");
+    
     IEC1bits.U2RXIE = 1; //enable interrupt for UART buffer
 }
 
@@ -33,6 +36,9 @@ void __attribute__((__interrupt__, __auto_psv__)) _INT1Interrupt () {
     appliedN2 = 0;
     
     boardState = STATE_SAFE;
+    
+    moveCursor(1,1);
+    writeStringLCD("STA:H");
     
     IEC1bits.U2RXIE = 1; //enable interrupt for UART buffer
 }
