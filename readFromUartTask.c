@@ -106,12 +106,14 @@ void updateLCD(short int retProc){
     //if A new ref arrives, update LCD
     if (retProc == REF_1){     
         sprintf(strLCD, "RPM:%d,%d", appliedN1, appliedN2);
+        clearLCD(2);
         moveCursor(2,1);
         writeStringLCD(strLCD);
         moveCursor(1,1);
         writeStringLCD("STA:C"); //to possible notify exit from timeout
     } else if (retProc == SAT_1){
         sprintf(strLCD, "RPM:%d,%d", appliedN1, appliedN2);
+        clearLCD(2);
         moveCursor(2,1);
         writeStringLCD(strLCD);   
     }
