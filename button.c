@@ -7,13 +7,16 @@ void __attribute__((__interrupt__, __auto_psv__)) _INT0Interrupt () {
     IEC0bits.INT0IE = 0; //disable interrupt for S5 button
     IEC1bits.INT1IE = 0; //disable interrupt for S6 button
     IEC0bits.T2IE = 0; //disable interrupt for timeout mode
+    IEC1bits.U2RXIE = 0; //disable interrupt for UART buffer
     
+    int n1, n2 = 0;
+    refreshPWMvalue(&n1, &n2);
     appliedN1 = 0;
     appliedN2 = 0;
     
-    refreshPWMvalue(&appliedN1, &appliedN1);
-    
     boardState = STATE_SAFE;
+    
+    IEC1bits.U2RXIE = 1; //enable interrupt for UART buffer
 }
 
 void __attribute__((__interrupt__, __auto_psv__)) _INT1Interrupt () {
@@ -22,11 +25,14 @@ void __attribute__((__interrupt__, __auto_psv__)) _INT1Interrupt () {
     IEC0bits.INT0IE = 0; //disable interrupt for S5 button
     IEC1bits.INT1IE = 0; //disable interrupt for S6 button
     IEC0bits.T2IE = 0; //disable interrupt for timeout mode
+    IEC1bits.U2RXIE = 0; //disable interrupt for UART buffer
     
+    int n1, n2 = 0;
+    refreshPWMvalue(&n1, &n2);
     appliedN1 = 0;
     appliedN2 = 0;
     
-    refreshPWMvalue(&appliedN1, &appliedN1);
-    
     boardState = STATE_SAFE;
+    
+    IEC1bits.U2RXIE = 1; //enable interrupt for UART buffer
 }
