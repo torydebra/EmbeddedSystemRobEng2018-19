@@ -12,5 +12,7 @@ void ledTask() {
     
     if (boardState == STATE_TIMEOUT){
         LATBbits.LATB1 = !LATBbits.LATB1;
+    } else {
+        LATBbits.LATB1 = 0; //switch off led4
     }
 }

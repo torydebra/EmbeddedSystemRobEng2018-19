@@ -4,6 +4,8 @@
 #include "averageTemperatureTask.h"
 #include "readFromUartTask.h"
 #include "sendFBKTask.h"
+#include "ledTask.h"
+#include "lcdWriteTask.h"
 
 
 void initHeartbeat(){
@@ -12,11 +14,13 @@ void initHeartbeat(){
         schedInfo[i].n = 0;        
     }
 
-    schedInfo[0].N = 1;
-    schedInfo[1].N = 1; 
-    schedInfo[2].N = 10;
-    schedInfo[3].N = 2;
-  
+    schedInfo[0].N = 1; //readFroumUArtTask
+    schedInfo[1].N = 1; //acqure temp
+    schedInfo[2].N = 10;// average temp & send to pc
+    schedInfo[3].N = 2; //fbk message to pc
+    schedInfo[4].N = 10; //leds blinking
+    schedInfo[5].N = 1; //update lcd STA & RMP
+   
 }
 
 void scheduler() {
@@ -37,6 +41,12 @@ void scheduler() {
                 case 3:
                     sendFBKTask();
                     break;
+                case 4:
+                    ledTask();
+                    break;
+                case 5:
+                    lcdWriteTask();
+                    
 			}
 			schedInfo[i].n = 0;
 		}

@@ -25,8 +25,8 @@ int averageTemperatureTask() {
     sprintf(avTemp, "MCTEM,%4.2f", aver);
     send2pc(avTemp);
     
-    sprintf(avTemp, "TEM:%4.2f", aver);
-    moveCursor(1, 7);
+    sprintf(avTemp, "%4.2f", aver);
+    moveCursor(1, 11);
     writeStringLCD(avTemp);
     
     return 0;

@@ -21,7 +21,6 @@
 int processMessage(char* type, char* payload);
 int readFromUartTask(void);
 void sendMC(short int retProc);
-void updateLCD(short int retProc);
 
 #endif	/* READFROMUARTTASK_H */
 

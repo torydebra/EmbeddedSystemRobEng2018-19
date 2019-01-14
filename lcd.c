@@ -51,21 +51,21 @@ void setupLCD() {
     writeStringLCD("RPM:0,0");
 }
 
-void clearLCD(short int row) {
+void clearLCD(short int row, short int startCol) {
     // if row==0 clear both rows
     int j=0;
     if (row == 1 || row == 0) {
         while(SPI1STATbits.SPITBF == 1); // wait until not full
-        SPI1BUF = 0x80; // move the cursor at the beginning of the line
-        for(j=0; j < 16; j++) {
+        SPI1BUF = 0x80 + startCol-1; // move the cursor at the beginning of the line
+        for(j=0; j < (16-startCol-1); j++) {
             while(SPI1STATbits.SPITBF == 1); // wait until not full
             SPI1BUF = ' '; // clean the screen before writing another word
         }
     }
     if (row == 2 || row == 0) {
         while(SPI1STATbits.SPITBF == 1); // wait until not full
-        SPI1BUF = 0xC0; // move the cursor at the beginning of the line
-        for(j=0; j < 16; j++) {
+        SPI1BUF = 0xC0 + startCol-1; // move the cursor at the beginning of the line
+        for(j=0; j < (16-startCol-1); j++) {
             while(SPI1STATbits.SPITBF == 1); // wait until not full
             SPI1BUF = ' '; // clean the screen before writing another word
         }

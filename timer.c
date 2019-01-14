@@ -1,5 +1,7 @@
 #include "timer.h"
 #include "lcd.h"
+#include "xc.h"
+#include "pwm.h"
 #include <stdlib.h>
 #include "globalVar.h"
 
@@ -34,12 +36,13 @@ void tmr1_setup_period(int ms) {
     TMR1 = 0;
     IFS0bits.T1IF = 0;
     
+    
     int t1tckps = 0;
 
     PR1 = set_prescaler(ms, &(t1tckps));
     
     T1CONbits.TCKPS = t1tckps;
-    
+    IEC0bits.T2IE = 0; //enable interrupt
     T1CONbits.TON = 1;
 
 }
@@ -65,7 +68,6 @@ int tmr1_wait_period(){
 void tmr2_setup_period(int ms) {
     T2CONbits.TON = 0;
     TMR2 = 0;
-    IFS0bits.T2IF = 1;
     
     int t2tckps = 0;
 
@@ -92,12 +94,13 @@ int tmr2_wait_period(){
 }
 
 void tmr2_reset_timer(){
-    T2CONbits.TMR2 = 0;
+    TMR2 = 0;
 }
 
 void tmr2_start_timer(){
     IEC0bits.T2IE = 1;
-    T2CONbits.TMR2 = 0;
+    TMR2 = 0;
+    IFS0bits.T2IF = 0; //set the flag = 0
     T2CONbits.TON = 1;
 }
 
@@ -114,7 +117,4 @@ void __attribute__((__interrupt__, __auto_psv__)) _T2Interrupt () {
     IFS0bits.T2IF = 0; //reset interrupt flag for timer 2
     T2CONbits.TON = 0; //stop the timer
     TMR2 = 0; //reset the timer 
-    
-    moveCursor(1,1);
-    writeStringLCD("STA:T");
 }

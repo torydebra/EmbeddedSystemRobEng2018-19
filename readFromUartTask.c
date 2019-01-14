@@ -42,7 +42,6 @@ int readFromUartTask(void) {
             if (retParse == NEW_MESSAGE){
                 retProc = processMessage(pstate.msg_type, pstate.msg_payload);
                 sendMC(retProc);
-                updateLCD(retProc);
             } 
         }        
     } 
@@ -62,23 +61,17 @@ int processMessage(char* type, char* payload){
             
             if (boardState == STATE_TIMEOUT){
                 tmr2_start_timer();
-                moveCursor(1,1);
-                writeStringLCD("STA:C"); //to possible notify exit from timeout
                 boardState = STATE_CONTROL; //exit timeout mode
             }
             sscanf(payload, "%d,%d", &n1, &n2);     
             if(!refreshPWMvalue(&n1, &n2)){
                 appliedN1 = n1;
                 appliedN2 = n2;
-
-                //send ACK POS (1)
-                return REF_1;         
+                
+                return REF_1;  //send ACK POS (1)        
             } else {              
                 return REF_0;            
             } 
-            
-            /** TODO qui??? */
-            // blink led D3 and stop D4
         }
         return REF_0; //safe mode does not accept new references
     
@@ -100,10 +93,7 @@ int processMessage(char* type, char* payload){
             tmr2_start_timer(); //timer for timeout mode
             IEC0bits.INT0IE = 1; //Button S5 for safe mode
             IEC1bits.INT1IE = 1; //Button S6 for safe mode
-            
-            moveCursor(1,1);
-            writeStringLCD("STA:C"); //to possible notify exit from timeout
-
+           
             return ENA_1;
         } else {
             return ENA_0;
@@ -113,18 +103,6 @@ int processMessage(char* type, char* payload){
     }
 
     return ERROR;
-}
-
-void updateLCD(short int retProc){
-
-    char strLCD[16];
-    //if A new ref arrives, update LCD
-    if (retProc == REF_1 || retProc == SAT_1){     
-        sprintf(strLCD, "RPM:%d,%d", appliedN1, appliedN2);
-        clearLCD(2);
-        moveCursor(2,1);
-        writeStringLCD(strLCD);
-    }
 }
 
 void sendMC(short int retProc){

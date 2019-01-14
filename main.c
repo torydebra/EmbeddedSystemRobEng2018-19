@@ -38,6 +38,8 @@
 #include "scheduler.h"
 #include "buffer.h"
 #include "bufferTemp.h"
+#include "button.h"
+#include "ledTask.h"
 #include "lcd.h"
 #include "timer.h"
 #include "uart.h"
@@ -52,7 +54,7 @@ Heartbeat schedInfo[MAX_TASKS];
 Buffer bufReceiving;
 BufferTemp buff;
 Parser_state pstate;
-short int boardState = STATE_CONTROL;
+volatile short int boardState = STATE_CONTROL;
 int maxRPM = MAX_SAFE_VEL;
 int minRPM = MIN_SAFE_VEL;
 int appliedN1 = 0;
@@ -69,10 +71,15 @@ int main(void) {
     setupUART2();
     setupADCtemp();
     setupLCD();
+    setupButton();
+    setupLed();
     
     //set timer for scheduler
     int heartbeat_time = 100;
     tmr1_setup_period(heartbeat_time);
+    
+    //set timer for timeout mode
+    tmr2_setup_period(5000);
     
     // main loop
     while (1) {
@@ -81,6 +88,7 @@ int main(void) {
         
        if(tmr1_wait_period()){
             writeStringLCD("hb expired!");
+            while(1);
        }
     }   
     
