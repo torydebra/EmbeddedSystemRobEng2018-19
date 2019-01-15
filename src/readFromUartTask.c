@@ -106,10 +106,10 @@ void sendMC_enableInterrupt(short int retProc){
     switch(retProc){
         
         case REF_0 :
-            send2pc("MCACK,REF,0");
+            //send2pc("MCACK,REF,0");
             break;
         case REF_1 :
-            send2pc("MCACK,REF,1");
+            //send2pc("MCACK,REF,1");
             tmr2_start_timer(); //reset timer because ref is arrived
             break;
         case SAT_0 :

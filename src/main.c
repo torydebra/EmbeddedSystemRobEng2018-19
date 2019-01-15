@@ -43,6 +43,7 @@
 #include "../header/support/lcd.h"
 #include "../header/support/timer.h"
 #include "../header/support/uart.h"
+#include "../header/support/pwm.h"
 
 #define STATE_CONTROL 0
 #define STATE_TIMEOUT 1
@@ -73,6 +74,7 @@ int main(void) {
     setupLCD();
     setupButton();
     setupLed();
+    setupPWM();
     
     //set timer for scheduler
     int heartbeat_time = 100;
@@ -85,6 +87,7 @@ int main(void) {
     while (1) {
         
         scheduler();
+   
         
        if(tmr1_wait_period()){
             writeStringLCD("hb expired!");
