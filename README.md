@@ -16,8 +16,8 @@ Note: only the mains are uploaded on Github, all the other stuff built automatic
 
 # Final project:
 ## Board to control autonomous catamaran
-
-### Tasks:
+Specifications []here
+### Features:
 * Receive Reference [100ms]
 * Refreshing PWM [100ms]
 * Acquire Temperature [100ms]
@@ -25,18 +25,37 @@ Note: only the mains are uploaded on Github, all the other stuff built automatic
 * Send Feedback Message MCFBK [200ms]
 * Blink Led for status (Control mode or timeout mode) [1s]
 * Check/Read message of type MLSAT [100ms]
+* S5/S6 button linked to interrupt to enter Safe mode
+* Write on LCD :
+    + Status (each time status change)
+    + Temperature (each time it send temp (4th task))
+    + Write references applied (each time pwm is refreshed (2nd task))
 
-### Other functionalities:
-S5/S6 button linked to interrupt to enter Safe mode
+* Send MCACK message to pc through UART
 
-Write on LCD :
-+ first row: 
-    + print status (each time status change)
-    + print temperature (each time it send temp (4th task))
-+ second row:
-    + write references applied (each time pwm is refreshed (2nd task))
+### Details
+* Scheduler with heartbit of 100ms to manage all the task
+* Five Tasks:
+    * Read/process message arrived from UART
+        * If references arrives, update PWM signals to control the motors
+    * Acquire Temperature from sensor
+    * Average last 10 temperature readings and send the mean to the UART
+    * Send a feedback FBK message
+    * Blink D3 and D4 leds to indicate correct running and timeout state
+    * Task to write correctly on the LCD display
+* Three Interrupts:
+    * To save incoming bytes from UART in a buffer (if registers are full)
+    * On S5 and S6 buttons, to immediately enter in safe mode
+    * On a timer, to check if 5 seconds passed without references, to enter in timeout mode
+* Peripherals used:
+    * D3 D4 leds
+    * S4 S5 buttons
+    * LCD display controlled throught SPI
+    * UART to send and receive messages
+    * PWM to generate signals (different duty cicle ratio) to control the motors
+    * Temperature Sensor
+    * Two timers: one for scheduler, one for check timeout mode
 
-MCACK message: sent in various tasks
-
-### Detail
-Scheduler with heartbit of 100ms
+## Contributors
+* [https://github.com/torydebra/](torydebra)
+* [https://github.com/fafux/](fafux)
