@@ -1,6 +1,6 @@
-#include "../header/support/temperature.h"
+#include "../../header/support/temperature.h"
 #include "xc.h"
-#include "../header/support/lcd.h"
+#include "../../header/support/lcd.h"
 
 void setupADCtemp() {
     

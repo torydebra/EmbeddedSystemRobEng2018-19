@@ -1,8 +1,8 @@
 #include <xc.h>
-#include "../header/support/globalVar.h"
-#include "../header/support/lcd.h"
-#include "../header/support/pwm.h"
-#include "../header/support/button.h"
+#include "../../header/support/globalVar.h"
+#include "../../header/support/lcd.h"
+#include "../../header/support/pwm.h"
+#include "../../header/support/button.h"
 
 void __attribute__((__interrupt__, __auto_psv__)) _INT0Interrupt () {
     

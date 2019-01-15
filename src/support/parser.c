@@ -1,5 +1,5 @@
-#include "../header/support/parser.h"
-#include "../header/support/globalVar.h"
+#include "../../header/support/parser.h"
+#include "../../header/support/globalVar.h"
 
 void setupParser(){
 	pstate.state = STATE_DOLLAR;

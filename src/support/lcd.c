@@ -1,5 +1,5 @@
-#include "../header/support/lcd.h"
-#include "../header/support/timer.h"
+#include "../../header/support/lcd.h"
+#include "../../header/support/timer.h"
 #include <xc.h>
 
 void writeCharLCD(char word) {

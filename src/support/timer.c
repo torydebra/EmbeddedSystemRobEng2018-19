@@ -1,9 +1,9 @@
-#include "../header/support/timer.h"
-#include "../header/support/lcd.h"
+#include "../../header/support/timer.h"
+#include "../../header/support/lcd.h"
 #include "xc.h"
-#include "../header/support/pwm.h"
+#include "../../header/support/pwm.h"
 #include <stdlib.h>
-#include "../header/support/globalVar.h"
+#include "../../header/support/globalVar.h"
 
 int set_prescaler(int ms, int *tckps) {
     

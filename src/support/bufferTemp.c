@@ -5,8 +5,8 @@
  * Created on 11 gennaio 2019, 10.04
  */
 
-#include "../header/support/bufferTemp.h"
-#include "../header/support/globalVar.h"
+#include "../../header/support/bufferTemp.h"
+#include "../../header/support/globalVar.h"
 
 void initBufTemp (){
     buff.index = 0;

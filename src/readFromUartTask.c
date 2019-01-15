@@ -14,6 +14,7 @@
 #include "../header/readFromUartTask.h"
 #include "../header/support/pwm.h"
 #include "../header/support/timer.h"
+#include "../header/support/button.h"
 
 int readFromUartTask(void) {
  
