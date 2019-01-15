@@ -93,11 +93,8 @@ int tmr2_wait_period(){
     return 0;
 }
 
-void tmr2_reset_timer(){
-    TMR2 = 0;
-}
-
 void tmr2_start_timer(){
+    T2CONbits.TON = 0;
     IEC0bits.T2IE = 1;
     TMR2 = 0;
     IFS0bits.T2IF = 0; //set the flag = 0

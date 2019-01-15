@@ -20,7 +20,7 @@
 
 int processMessage(char* type, char* payload);
 int readFromUartTask(void);
-void sendMC(short int retProc);
+void sendMC_enableInterrupt(short int retProc);
 
 #endif	/* READFROMUARTTASK_H */
 

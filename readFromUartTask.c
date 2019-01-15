@@ -41,7 +41,9 @@ int readFromUartTask(void) {
            
             if (retParse == NEW_MESSAGE){
                 retProc = processMessage(pstate.msg_type, pstate.msg_payload);
-                sendMC(retProc);
+                sendMC_enableInterrupt(retProc);
+                
+                
             } 
         }        
     } 
@@ -57,10 +59,8 @@ int processMessage(char* type, char* payload){
     if (strcmp(type, "HLREF") == 0){
  
         if (boardState != STATE_SAFE){
-            tmr2_reset_timer();
             
-            if (boardState == STATE_TIMEOUT){
-                tmr2_start_timer();
+            if (boardState == STATE_TIMEOUT){         
                 boardState = STATE_CONTROL; //exit timeout mode
             }
             sscanf(payload, "%d,%d", &n1, &n2);     
@@ -87,13 +87,8 @@ int processMessage(char* type, char* payload){
           
     } else if(strcmp(type, "HLENA") == 0) {
         if (boardState == STATE_SAFE){
-            boardState = STATE_CONTROL;
             
-            //re-enable interrupts
-            tmr2_start_timer(); //timer for timeout mode
-            IEC0bits.INT0IE = 1; //Button S5 for safe mode
-            IEC1bits.INT1IE = 1; //Button S6 for safe mode
-           
+            boardState = STATE_CONTROL;
             return ENA_1;
         } else {
             return ENA_0;
@@ -105,7 +100,7 @@ int processMessage(char* type, char* payload){
     return ERROR;
 }
 
-void sendMC(short int retProc){
+void sendMC_enableInterrupt(short int retProc){
 
     switch(retProc){
         
@@ -114,6 +109,7 @@ void sendMC(short int retProc){
             break;
         case REF_1 :
             send2pc("MCACK,REF,1");
+            tmr2_start_timer(); //reset timer because ref is arrived
             break;
         case SAT_0 :
             send2pc("MCACK,SAT,0");
@@ -126,6 +122,9 @@ void sendMC(short int retProc){
             break;    
         case ENA_1 :
             send2pc("MCACK,ENA,1");
+            //re-enable interrupts
+            tmr2_start_timer(); //reenable interrupts for timeout mode
+            setupButton(); //reenable interrupts for safe mode
             break;
         default:
             break;            
