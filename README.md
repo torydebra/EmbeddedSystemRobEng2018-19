@@ -16,7 +16,7 @@ Note: only the mains are uploaded on Github, all the other stuff built automatic
 
 # Final project:
 ## Board to control autonomous catamaran
-Specifications []here
+Specifications [here](https://github.com/fafux/EmbeddedSystemRobEng2018-19/blob/master/Progetto.pdf)
 ### Features:
 * Receive Reference [100ms]
 * Refreshing PWM [100ms]
@@ -57,5 +57,5 @@ Specifications []here
     * Two timers: one for scheduler, one for check timeout mode
 
 ## Contributors
-* [https://github.com/torydebra/](torydebra)
-* [https://github.com/fafux/](fafux)
+* [torydebra](https://github.com/torydebra/)
+* [fafux](https://github.com/fafux/)
