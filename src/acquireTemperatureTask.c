@@ -1,4 +1,4 @@
-#include "acquireTemperatureTask.h"
+#include "../header/acquireTemperatureTask.h"
 #include "globalVar.h"
 #include "temperature.h"
 #include <stdio.h>
