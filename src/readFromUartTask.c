@@ -7,13 +7,13 @@
 #include "xc.h"
 #include <stdio.h>
 #include <string.h>
-#include "parser.h"
-#include "uart.h"
-#include "globalVar.h"
-#include "lcd.h"
-#include "readFromUartTask.h"
-#include "pwm.h"
-#include "timer.h"
+#include "../header/support/parser.h"
+#include "../header/support/uart.h"
+#include "../header/support/globalVar.h"
+#include "../header/support/lcd.h"
+#include "../header/readFromUartTask.h"
+#include "../header/support/pwm.h"
+#include "../header/support/timer.h"
 
 int readFromUartTask(void) {
  

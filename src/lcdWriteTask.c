@@ -1,6 +1,6 @@
 #include "xc.h"
-#include "lcd.h"
-#include "globalVar.h"
+#include "../header/support/lcd.h"
+#include "../header/support/globalVar.h"
 #include <stdio.h>
 
 void lcdWriteTask(){

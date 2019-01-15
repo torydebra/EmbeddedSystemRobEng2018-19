@@ -1,5 +1,5 @@
 #include <xc.h>
-#include "globalVar.h"
+#include "../header/support/globalVar.h"
 
 void setupLed(){
     // setup LEDs as outputs

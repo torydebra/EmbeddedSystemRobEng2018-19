@@ -1,9 +1,9 @@
-#include "bufferTemp.h"
-#include "globalVar.h"
-#include "lcd.h"
-#include "averageTemperatureTask.h"
+#include "../header/support/bufferTemp.h"
+#include "../header/support/globalVar.h"
+#include "../header/support/lcd.h"
+#include "../header/averageTemperatureTask.h"
 #include <stdio.h>
-#include "uart.h"
+#include "../header/support/uart.h"
 
 float averageTemp() {
     

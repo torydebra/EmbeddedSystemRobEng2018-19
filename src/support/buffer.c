@@ -5,7 +5,7 @@
  * Created on 11 gennaio 2019, 10.04
  */
 #include "xc.h"
-#include "buffer.h"
+#include "../header/support/buffer.h"
 
 void initBuf (Buffer *buffer){
     buffer->head = 0;

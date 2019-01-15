@@ -33,16 +33,16 @@
 // Use project enums instead of #define for ON and OFF.
 
 #include <xc.h>
-#include "temperature.h"
-#include "parser.h"
-#include "scheduler.h"
-#include "buffer.h"
-#include "bufferTemp.h"
-#include "button.h"
-#include "ledTask.h"
-#include "lcd.h"
-#include "timer.h"
-#include "uart.h"
+#include "../header/support/temperature.h"
+#include "../header/support/parser.h"
+#include "../header/scheduler.h"
+#include "../header/support/buffer.h"
+#include "../header/support/bufferTemp.h"
+#include "../header/support/button.h"
+#include "../header/ledTask.h"
+#include "../header/support/lcd.h"
+#include "../header/support/timer.h"
+#include "../header/support/uart.h"
 
 #define STATE_CONTROL 0
 #define STATE_TIMEOUT 1

@@ -7,8 +7,9 @@
 
 #include <stdio.h>
 #include "xc.h"
-#include "globalVar.h"
-#include "uart.h"
+#include "../header/support/globalVar.h"
+#include "../header/support/uart.h"
+#include "../header/sendFBKTask.h"
 
 int sendFBKTask(void) {
     

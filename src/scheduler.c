@@ -1,11 +1,11 @@
-#include "globalVar.h"
-#include "scheduler.h"
-#include "acquireTemperatureTask.h"
-#include "averageTemperatureTask.h"
-#include "readFromUartTask.h"
-#include "sendFBKTask.h"
-#include "ledTask.h"
-#include "lcdWriteTask.h"
+#include "../header/support/globalVar.h"
+#include "../header/scheduler.h"
+#include "../header/acquireTemperatureTask.h"
+#include "../header/averageTemperatureTask.h"
+#include "../header/readFromUartTask.h"
+#include "../header/sendFBKTask.h"
+#include "../header/ledTask.h"
+#include "../header/lcdWriteTask.h"
 
 
 void initHeartbeat(){

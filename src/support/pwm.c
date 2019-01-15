@@ -6,8 +6,8 @@
  */
 
 #include "xc.h"
-#include "pwm.h"
-#include "globalVar.h"
+#include "../header/support/pwm.h"
+#include "../header/support/globalVar.h"
 
 void setupPWM () {
     

@@ -1,7 +1,7 @@
-#include "uart.h"
+#include "../header/support/uart.h"
 #include "xc.h"
-#include "buffer.h"
-#include "globalVar.h"
+#include "../header/support/buffer.h"
+#include "../header/support/globalVar.h"
 #include <stdio.h>
 #include <string.h>
 
