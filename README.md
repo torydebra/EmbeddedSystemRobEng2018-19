@@ -4,16 +4,6 @@ Laboratiories with MPLAB-X in C language for Embedded System course of Robotics 
 The board used is a Microchip dsPIC30F4011 with pickit3 programmer.  
 Note: only the mains are uploaded on Github, all the other stuff built automatically by the IDE are omitted.
 
-# Laboratories:
-
-* LAB1: Use of leds and buttons
-* LAB2: Timers
-* LAB3: Interrupts
-* LAB4: use of display: SPI
-* LAB5: UART to conect the board with the outside (a pc in our case)
-* LAB6: ADC : analog to digital converter 
-* LAB7: PWM : generate a pulse width modulated signal to control the velocity of a servomotor.
-
 # Final project:
 ## Board to control autonomous catamaran
 Specifications [here](https://github.com/fafux/EmbeddedSystemRobEng2018-19/blob/master/Progetto.pdf)
@@ -55,6 +45,18 @@ Specifications [here](https://github.com/fafux/EmbeddedSystemRobEng2018-19/blob/
     * PWM to generate signals (different duty cicle ratio) to control the motors
     * Temperature Sensor
     * Two timers: one for scheduler, one for check timeout mode
+
+
+# Laboratories:
+
+* LAB1: Use of leds and buttons
+* LAB2: Timers
+* LAB3: Interrupts
+* LAB4: use of display: SPI
+* LAB5: UART to conect the board with the outside (a pc in our case)
+* LAB6: ADC : analog to digital converter 
+* LAB7: PWM : generate a pulse width modulated signal to control the velocity of a servomotor.
+
 
 ## Contributors
 * [torydebra](https://github.com/torydebra/)
