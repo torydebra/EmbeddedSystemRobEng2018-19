@@ -1,5 +1,5 @@
 #include <xc.h> // include processor files - each processor file is guarded.  
-#include "scheduler.h"
+#include "../scheduler.h"
 #include "buffer.h"
 #include "bufferTemp.h"
 #include "parser.h"
