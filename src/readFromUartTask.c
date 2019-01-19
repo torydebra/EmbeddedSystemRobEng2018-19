@@ -20,34 +20,30 @@ int readFromUartTask(void) {
  
     int value = 0;
     char c;
-    short int i = 0;
     short int retParse = 0;
     short int retProc = 0;
-    short int arrived = 0;
     short int retBuf = 0;
     
-    for (i=0; i < MAX_CHAR_READ; i++){
-        
-        arrived = 0;
+    while (sizeBuf(&bufReceiving) > 0){
         retBuf = readBuf(&bufReceiving, &value);
-        if (retBuf != -1) { // first check if there are characters to be read in the buffer
-            arrived = 1;
-        } else if (U2STAbits.URXDA == 1) { //notifies if there are characters to be read 
-            value = U2RXREG; 
-            arrived = 1;
-        }       
-        if (arrived){
-            c = value; //"convert" into the correspondend ascii
-            retParse = parse_byte(&pstate, c);
+        c = value; //"convert" into the correspondend ascii
+        retParse = parse_byte(&pstate, c);
            
-            if (retParse == NEW_MESSAGE){
-                retProc = processMessage(pstate.msg_type, pstate.msg_payload);
-                sendMC_enableInterrupt(retProc);
-                
-                
-            } 
-        }        
-    } 
+        if (retParse == NEW_MESSAGE){
+           retProc = processMessage(pstate.msg_type, pstate.msg_payload);
+           sendMC_enableInterrupt(retProc);                       
+        } 
+    }
+    while (U2STAbits.URXDA == 1) { //notifies if there are characters to be read 
+        value = U2RXREG;  
+        c = value; //"convert" into the correspondend ascii
+        retParse = parse_byte(&pstate, c);
+           
+        if (retParse == NEW_MESSAGE){
+           retProc = processMessage(pstate.msg_type, pstate.msg_payload);
+           sendMC_enableInterrupt(retProc);
+        }
+    }
    return 0;
 }
 

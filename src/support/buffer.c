@@ -32,3 +32,15 @@ int readBuf (Buffer *buffer, int* value) {
         return 0;
     }
 }
+
+int sizeBuf (Buffer *buffer){
+    
+    if (buffer->tail >= buffer->head){
+        return (buffer->tail - buffer->head);
+    } else {
+        return (DIMBUF - (buffer->head - buffer->tail));
+    }
+    return -1; //error
+    
+}
+
