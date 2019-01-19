@@ -42,7 +42,6 @@ void tmr1_setup_period(int ms) {
     PR1 = set_prescaler(ms, &(t1tckps));
     
     T1CONbits.TCKPS = t1tckps;
-    IEC0bits.T2IE = 0; //enable interrupt
     T1CONbits.TON = 1;
 
 }

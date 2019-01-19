@@ -6,22 +6,19 @@
 void lcdWriteTask(){
     
     char str[16];
-    
+    moveCursor(1,5);
+
     switch (boardState){
         case STATE_CONTROL:
-            moveCursor(1,5);
             writeCharLCD('C');
             break;
         case STATE_TIMEOUT:
-            moveCursor(1,5);
             writeCharLCD('T');
             break;
         case STATE_SAFE:
-            moveCursor(1,5);
             writeCharLCD('H');
             break;
         default:
-            moveCursor(1,5);
             writeCharLCD('?');
     }
     

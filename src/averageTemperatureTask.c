@@ -22,10 +22,11 @@ int averageTemperatureTask() {
     
     char avTemp[20];
     float aver = averageTemp();
-    sprintf(avTemp, "MCTEM,%4.2f", aver);
+    sprintf(avTemp, "MCTEM,%.2f", aver);
     send2pc(avTemp);
     
-    sprintf(avTemp, "%4.2f", aver);
+    sprintf(avTemp, "%.2f", aver);
+    clearLCD(1,11);
     moveCursor(1, 11);
     writeStringLCD(avTemp);
     
