@@ -34,7 +34,8 @@ void interruptManage(){
     IEC0bits.T2IE = 0; //disable interrupt for timeout mode
     IFS0bits.T2IF = 0; //set the flag = 0
     
-    int n1, n2 = 0;
+    int n1 = 0;
+    int n2 = 0;
     refreshPWMvalue(&n1, &n2);
     appliedN1 = 0;
     appliedN2 = 0;

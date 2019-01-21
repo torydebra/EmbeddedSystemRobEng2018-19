@@ -51,7 +51,10 @@ int readFromUartTask(void) {
 
 int processMessage(char* type, char* payload){
     
-    int n1, n2, min, max = 0;
+    int n1 = 0; 
+    int n2 = 0;
+    int min = 0;
+    int max = 0;
     
     if (strcmp(type, "HLREF") == 0){
  

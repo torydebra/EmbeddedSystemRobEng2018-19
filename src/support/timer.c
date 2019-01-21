@@ -105,7 +105,8 @@ void __attribute__((__interrupt__, __auto_psv__)) _T2Interrupt () {
     IEC0bits.T2IE = 0;
     
     boardState = STATE_TIMEOUT;
-    int n1, n2 = 0;
+    int n1=0;
+    int n2 = 0;
     refreshPWMvalue(&n1, &n2);
     appliedN1 = 0;
     appliedN2 = 0;
