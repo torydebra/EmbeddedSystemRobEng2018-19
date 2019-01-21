@@ -5,7 +5,7 @@ The board used is a Microchip dsPIC30F4011 with pickit3 programmer.
 Note: only the mains are uploaded on Github, all the other stuff built automatically by the IDE are omitted.
 
 # Final project: Board to control autonomous catamaran
-Specifications [here](https://github.com/fafux/EmbeddedSystemRobEng2018-19/blob/master/Progetto.pdf)  
+Specifications [here](https://github.com/torydebra/EmbeddedSystemRobEng2018-19/blob/master/Progetto.pdf)  
 
 <p align="center">
     <img src="https://user-images.githubusercontent.com/26459008/51178015-ab1bee80-18c1-11e9-9555-127687236c85.jpg" alt="board photo" width="300"/>
